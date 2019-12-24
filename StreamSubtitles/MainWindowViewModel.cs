@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -27,14 +28,33 @@ namespace StreamSubtitles
 
         public ObservableCollection<string> SubtitleLines { get; } = new ObservableCollection<string>();
 
-        private string _DisplayedLine;
+        private string _DisplayedLine = "";
         public string DisplayedLine
         {
             get => _DisplayedLine;
             set => Set(ref _DisplayedLine, value);
         }
 
-        private SpeechRecognizer Recognizer { get; set; }
+        private string? _PendingText;
+        public string? PendingText
+        {
+            get => _PendingText;
+            set => Set(ref _PendingText, value);
+        }
+
+        private SpeechRecognizer? _Recognizer;
+        public SpeechRecognizer? Recognizer
+        {
+            get => _Recognizer;
+            set
+            {
+                SpeechRecognizer? originalValue = _Recognizer;
+                if (Set(ref _Recognizer, value))
+                {
+                    originalValue?.Dispose();
+                }
+            } 
+        }
 
         public MainWindowViewModel()
         {
@@ -48,15 +68,17 @@ namespace StreamSubtitles
 
         private void OnStop()
         {
-
+            Recognizer = null;
+            PendingText = null;
         }
 
         private async void OnStart()
         {
             bool isChecked = true;
 
-            var config = SpeechConfig.FromSubscription(Environment.GetEnvironmentVariable("StreamSubtitlesKey"), Region);
+            SpeechConfig config = SpeechConfig.FromSubscription(Environment.GetEnvironmentVariable("StreamSubtitlesKey"), Region);
             config.SpeechRecognitionLanguage = RecognitionLanguage;
+            
             var recognizer = Recognizer = new SpeechRecognizer(config);
             {
                 if (isChecked)
@@ -69,8 +91,13 @@ namespace StreamSubtitles
                 //EventHandler<SessionEventArgs> sessionStoppedHandler = (sender, e) => SessionStoppedEventHandler(e, recoType, source);
                 //EventHandler<RecognitionEventArgs> speechStartDetectedHandler = (sender, e) => SpeechDetectedEventHandler(e, recoType, "start");
                 //EventHandler<RecognitionEventArgs> speechEndDetectedHandler = (sender, e) => SpeechDetectedEventHandler(e, recoType, "end");
-
+                
+                recognizer.SessionStarted += RecognizerOnSessionStarted;
+                recognizer.SessionStopped += RecognizerOnSessionStopped;
+                recognizer.SpeechStartDetected += RecognizerOnSpeechStartDetected;
+                recognizer.SpeechEndDetected += RecognizerOnSpeechEndDetected;
                 recognizer.Recognized += RecognizedEventHandler;
+                recognizer.Canceled += RecognizerOnCanceled;
                 //recognizer.Canceled += canceledHandler;
                 //recognizer.SessionStarted += sessionStartedHandler;
                 //recognizer.SessionStopped += sessionStoppedHandler;
@@ -95,9 +122,36 @@ namespace StreamSubtitles
             }
         }
 
+        private void RecognizerOnCanceled(object sender, SpeechRecognitionCanceledEventArgs e)
+        {
+            Debug.WriteLine($"  => {e}");
+        }
+
+        private void RecognizerOnSpeechEndDetected(object sender, RecognitionEventArgs e)
+        {
+            Debug.WriteLine($"  => Speech End Detected {e}");
+        }
+
+        private void RecognizerOnSpeechStartDetected(object sender, RecognitionEventArgs e)
+        {
+            Debug.WriteLine($"  => Speech Start Detected {e}");
+        }
+
+        private void RecognizerOnSessionStopped(object sender, SessionEventArgs e)
+        {
+            Debug.WriteLine($"  => Session Stopped {e.SessionId}");
+        }
+
+        private void RecognizerOnSessionStarted(object sender, SessionEventArgs e)
+        {
+            Debug.WriteLine($"  => Session Started {e.SessionId}");
+        }
+
+
         private void RecognizingEventHandler(object _, SpeechRecognitionEventArgs e)
         {
-            Debug.WriteLine($"  => {e.Result.Text}");
+            PendingText = e.Result.Text;
+            //Debug.WriteLine($"  => {e.Result.ResultId} {e.Result.Text}");
             //var log = (rt == RecoType.Base) ? this.baseModelLogText : this.customModelLogText;
             //this.WriteLine(log, "Intermediate result: {0} ", e.Result.Text);
         }
@@ -105,12 +159,13 @@ namespace StreamSubtitles
         private void RecognizedEventHandler(object _, SpeechRecognitionEventArgs e)
         {
             //TODO: Handle e.Result.Reason?
-
-            //TODO Split up text based on length
-
+            PendingText = null;
             foreach (string line in GetLines(e.Result.Text))
             {
-                SubtitleLines.Add(line);
+                lock (SubtitleLines)
+                {
+                    SubtitleLines.Add(line);
+                }
             }
         }
 
@@ -131,8 +186,10 @@ namespace StreamSubtitles
             for (var index = 0; index < words.Length; index++)
             {
                 var word = words[index];
-                //TODO: Don't put a space at the beginning
-                sb.Append(' ');
+                if (index > 0)
+                {
+                    sb.Append(' ');
+                }
                 sb.Append(word);
 
                 double width = GetWidth(sb.ToString());
