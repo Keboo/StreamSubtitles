@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamSubtitles", "StreamSubtitles\StreamSubtitles.csproj", "{03D75769-833D-4E96-827A-31367ABD8387}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreamSubtitles", "StreamSubtitles\StreamSubtitles.csproj", "{03D75769-833D-4E96-827A-31367ABD8387}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamSubtitles.Tests", "StreamSubtitles.Tests\StreamSubtitles.Tests.csproj", "{CE2FC0BF-BDE3-47E7-AE67-6DEB5E4BF2E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{03D75769-833D-4E96-827A-31367ABD8387}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03D75769-833D-4E96-827A-31367ABD8387}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{03D75769-833D-4E96-827A-31367ABD8387}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE2FC0BF-BDE3-47E7-AE67-6DEB5E4BF2E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE2FC0BF-BDE3-47E7-AE67-6DEB5E4BF2E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE2FC0BF-BDE3-47E7-AE67-6DEB5E4BF2E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE2FC0BF-BDE3-47E7-AE67-6DEB5E4BF2E4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
