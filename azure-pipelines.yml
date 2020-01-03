@@ -49,6 +49,7 @@ steps:
     solution: '$(solution)'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+    msbuildArguments: '/p:UapAppxPackageBuildMode=SideLoadOnly /p:AppxPackageSigningEnabled=false'
 
 - task: VSTest@2
   inputs:
@@ -61,13 +62,13 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
-- task: MSBuild@1
-  inputs:
-    solution: '**/StreamSubtitles.Package.wapproj'
-    platform: $(buildPlatform)
-    configuration: $(buildConfiguration)
-    msbuildArguments: '/p:OutputPath=NonPackagedApp /p:UapAppxPackageBuildMode=SideLoadOnly /p:AppxBundle=Always /p:AppxPackageSigningEnabled=false'
-  displayName: 'Package the App'
+#- task: MSBuild@1
+#  inputs:
+#    solution: '**/StreamSubtitles.Package.wapproj'
+#    platform: $(buildPlatform)
+#    configuration: $(buildConfiguration)
+#    msbuildArguments: '/p:OutputPath=NonPackagedApp /p:UapAppxPackageBuildMode=SideLoadOnly /p:AppxPackageSigningEnabled=false'
+#  displayName: 'Package the App'
 
 # - task: DownloadSecureFile@1
 #   inputs:
