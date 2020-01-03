@@ -7,6 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreamSubtitles", "StreamSu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreamSubtitles.Tests", "StreamSubtitles.Tests\StreamSubtitles.Tests.csproj", "{CE2FC0BF-BDE3-47E7-AE67-6DEB5E4BF2E4}"
 EndProject
+Project("{C7167F0D-BC9F-4E6E-AFE1-012C56B48DB5}") = "StreamSubtitles.Package", "StreamSubtitles.Package\StreamSubtitles.Package.wapproj", "{B9AE470E-C942-4DD9-BCD9-3BF6A4769BC2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B5D1672E-018A-4FDE-8886-C58A1BC2FC6D}"
+	ProjectSection(SolutionItems) = preProject
+		azure-pipelines.yml = azure-pipelines.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +28,12 @@ Global
 		{CE2FC0BF-BDE3-47E7-AE67-6DEB5E4BF2E4}.Debug|x64.Build.0 = Debug|x64
 		{CE2FC0BF-BDE3-47E7-AE67-6DEB5E4BF2E4}.Release|x64.ActiveCfg = Release|x64
 		{CE2FC0BF-BDE3-47E7-AE67-6DEB5E4BF2E4}.Release|x64.Build.0 = Release|x64
+		{B9AE470E-C942-4DD9-BCD9-3BF6A4769BC2}.Debug|x64.ActiveCfg = Debug|x64
+		{B9AE470E-C942-4DD9-BCD9-3BF6A4769BC2}.Debug|x64.Build.0 = Debug|x64
+		{B9AE470E-C942-4DD9-BCD9-3BF6A4769BC2}.Debug|x64.Deploy.0 = Debug|x64
+		{B9AE470E-C942-4DD9-BCD9-3BF6A4769BC2}.Release|x64.ActiveCfg = Release|x64
+		{B9AE470E-C942-4DD9-BCD9-3BF6A4769BC2}.Release|x64.Build.0 = Release|x64
+		{B9AE470E-C942-4DD9-BCD9-3BF6A4769BC2}.Release|x64.Deploy.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
