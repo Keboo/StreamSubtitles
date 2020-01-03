@@ -35,17 +35,17 @@ steps:
   inputs:
     restoreSolution: '$(solution)'
 
-- powershell: |
-   [Reflection.Assembly]::LoadWithPartialName("System.Xml.Linq")
-   $path = "$(System.DefaultWorkingDirectory)/StreamSubtitles.Package/Package.appxmanifest"
-   $doc = [System.Xml.Linq.XDocument]::Load($path)
-   $xName =
-     [System.Xml.Linq.XName]
-       "{http://schemas.microsoft.com/appx/manifest/foundation/windows10}Identity"
-   $doc.Root.Element($xName).Attribute("Version").Value =
-     "$(major).$(minor).$(build).$(revision)";
-   $doc.Save($path)
-  displayName: 'Version Package Manifest'
+# - powershell: |
+#    [Reflection.Assembly]::LoadWithPartialName("System.Xml.Linq")
+#    $path = "$(System.DefaultWorkingDirectory)/StreamSubtitles.Package/Package.appxmanifest"
+#    $doc = [System.Xml.Linq.XDocument]::Load($path)
+#    $xName =
+#      [System.Xml.Linq.XName]
+#        "{http://schemas.microsoft.com/appx/manifest/foundation/windows10}Identity"
+#    $doc.Root.Element($xName).Attribute("Version").Value =
+#      "$(major).$(minor).$(build).$(revision)";
+#    $doc.Save($path)
+#   displayName: 'Version Package Manifest'
 
 - task: VSBuild@1
   inputs:
