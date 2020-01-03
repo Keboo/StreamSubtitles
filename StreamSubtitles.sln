@@ -5,22 +5,22 @@ VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreamSubtitles", "StreamSubtitles\StreamSubtitles.csproj", "{03D75769-833D-4E96-827A-31367ABD8387}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamSubtitles.Tests", "StreamSubtitles.Tests\StreamSubtitles.Tests.csproj", "{CE2FC0BF-BDE3-47E7-AE67-6DEB5E4BF2E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StreamSubtitles.Tests", "StreamSubtitles.Tests\StreamSubtitles.Tests.csproj", "{CE2FC0BF-BDE3-47E7-AE67-6DEB5E4BF2E4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{03D75769-833D-4E96-827A-31367ABD8387}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{03D75769-833D-4E96-827A-31367ABD8387}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{03D75769-833D-4E96-827A-31367ABD8387}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{03D75769-833D-4E96-827A-31367ABD8387}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CE2FC0BF-BDE3-47E7-AE67-6DEB5E4BF2E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CE2FC0BF-BDE3-47E7-AE67-6DEB5E4BF2E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CE2FC0BF-BDE3-47E7-AE67-6DEB5E4BF2E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CE2FC0BF-BDE3-47E7-AE67-6DEB5E4BF2E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03D75769-833D-4E96-827A-31367ABD8387}.Debug|x64.ActiveCfg = Debug|x64
+		{03D75769-833D-4E96-827A-31367ABD8387}.Debug|x64.Build.0 = Debug|x64
+		{03D75769-833D-4E96-827A-31367ABD8387}.Release|x64.ActiveCfg = Release|x64
+		{03D75769-833D-4E96-827A-31367ABD8387}.Release|x64.Build.0 = Release|x64
+		{CE2FC0BF-BDE3-47E7-AE67-6DEB5E4BF2E4}.Debug|x64.ActiveCfg = Debug|x64
+		{CE2FC0BF-BDE3-47E7-AE67-6DEB5E4BF2E4}.Debug|x64.Build.0 = Debug|x64
+		{CE2FC0BF-BDE3-47E7-AE67-6DEB5E4BF2E4}.Release|x64.ActiveCfg = Release|x64
+		{CE2FC0BF-BDE3-47E7-AE67-6DEB5E4BF2E4}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

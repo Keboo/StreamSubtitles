@@ -5,6 +5,7 @@
 
     <IsPackable>false</IsPackable>
     <Nullable>enable</Nullable>
+    <Platforms>x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
