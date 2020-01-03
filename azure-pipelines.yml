@@ -47,9 +47,9 @@ steps:
 - task: VSBuild@1
   inputs:
     solution: '$(solution)'
+    msbuildArgs: '/p:UapAppxPackageBuildMode=SideLoadOnly /p:AppxPackageSigningEnabled=false'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
-    msbuildArguments: '/p:UapAppxPackageBuildMode=SideLoadOnly /p:AppxPackageSigningEnabled=false'
 
 - task: VSTest@2
   inputs:
