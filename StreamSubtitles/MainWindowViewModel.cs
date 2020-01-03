@@ -3,6 +3,7 @@ using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -103,6 +104,10 @@ namespace StreamSubtitles
             while (true)
             {
                 string line = "";
+                while (string.IsNullOrWhiteSpace(DisplayedLine) && !SubtitleLines.Any())
+                {
+                    await Task.Delay(100);
+                }
                 lock (SubtitleLines)
                 {
                     if (SubtitleLines.Count > 0)
