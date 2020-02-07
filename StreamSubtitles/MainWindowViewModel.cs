@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -120,7 +121,19 @@ namespace StreamSubtitles
                 DisplayedLine = line;
                 await File.WriteAllTextAsync(FilePath, line);
 
-                await Task.Delay(TimeSpan.FromSeconds(2.5));
+                //Min delay 1 second, max delay 2.5 seconds
+                TimeSpan delay = SubtitleLines.Count switch
+                {
+                    0 => TimeSpan.FromSeconds(2.5),
+                    1 => TimeSpan.FromSeconds(2.2),
+                    2 => TimeSpan.FromSeconds(2.0),
+                    3 => TimeSpan.FromSeconds(1.8),
+                    4 => TimeSpan.FromSeconds(1.6),
+                    5 => TimeSpan.FromSeconds(1.4),
+                    6 => TimeSpan.FromSeconds(1.2),
+                    _ => TimeSpan.FromSeconds(1.0)
+                };
+                await Task.Delay(delay);
             }
         }
     }
